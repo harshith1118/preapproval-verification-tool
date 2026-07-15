@@ -1,0 +1,43 @@
+category: coaching
+description: "Coaching (for Parents/Spouse) — educational courses; adults 18+; capped rates."
+
+fields:
+  item_label: "Name of Coaching Provider"
+  url_label: "Link to Webpage"
+  fee_label_per_class: "Fee per Class"
+  fee_label_per_course: "Fee per Course"
+
+website_verifiable:
+  - id: published_fees
+    label: "Published fees exist for the course/class"
+    check_type: price_presence
+    notes: "Look for dollar amounts near the course/class listing."
+
+  - id: fee_sanity_check
+    label: "Fee sanity-check: ≤ $55 per group class / ≤ $111 per private class"
+    check_type: price_compare
+    max_group_fee: 55
+    max_private_fee: 111
+    notes: "Compare the per-class fee to the caps."
+
+  - id: genuine_educational
+    label: "Content is a genuine educational/coaching opportunity"
+    check_type: text_match
+    keywords:
+      - "education"
+      - "coaching"
+      - "workshop"
+      - "seminar"
+      - "course"
+      - "training"
+    notes: "Flag if the page primarily describes lodging, travel, or vacation."
+
+internal:
+  - id: budget_approved
+    label: "Is coaching education currently approved in the budget?"
+  - id: over_18
+    label: "Is the individual over 18?"
+  - id: addresses_lp_goals
+    label: "Does the coaching address the individual's goals being worked on in the LP?"
+  - id: not_funded_elsewhere
+    label: "Can the coaching program be funded by other public programs?"

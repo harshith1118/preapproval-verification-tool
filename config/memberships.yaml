@@ -1,0 +1,45 @@
+category: memberships
+description: "Health-Club / Organizational Memberships — gym/organization memberships."
+
+fields:
+  item_label: "Membership Name"
+  provider_label: "Name of Organization"
+  url_label: "Link to Webpage / Place of Publication"
+  fee_label: "Membership Fee"
+
+website_verifiable:
+  - id: open_to_public
+    label: "Organization is open to the public — not a private/invitation-only club"
+    check_type: text_match
+    keywords:
+      - "open to the public"
+      - "membership open"
+      - "join today"
+      - "become a member"
+      - "public welcome"
+      - "everyone"
+    notes: "Flag if the page mentions 'invitation only', 'private club', or 'members by referral'."
+
+  - id: published_fee
+    label: "Membership fee is published"
+    check_type: price_presence
+    notes: "Look for membership pricing, monthly/annual rates."
+
+  - id: fee_match
+    label: "Published fee matches the form's fee"
+    check_type: price_compare
+    notes: "Compare extracted membership price to form fee. Consider monthly vs. yearly."
+
+internal:
+  - id: budget_approved
+    label: "Are memberships currently approved in the budget?"
+  - id: community_inclusion
+    label: "Does the membership provide opportunity for community inclusion?"
+  - id: health_safety_accommodation
+    label: "Does the membership accommodate the individual's health and/or safety needs?"
+  - id: increases_independence
+    label: "Does the membership increase independence or substitute for human assistance?"
+  - id: exclusively_for_participant
+    label: "Is the membership provided exclusively for the benefit of the participant?"
+  - id: duplicates_medicaid_waiver
+    label: "Does the membership duplicate any Medicaid state plan or HCBS waiver services?"

@@ -1,0 +1,109 @@
+category: community_class
+description: "Community Classes — the primary, highest-volume case."
+
+# Field labels as they appear on the form (used for extraction mapping)
+fields:
+  item_label: "Class Name"
+  provider_label: "Name of Provider/Vendor"
+  url_label: "Link to Webpage / Place of Publication"
+  fee_label: "Fee per Session"
+  duration_label: "Duration per Session"
+
+# Website-verifiable checklist items — the tool checks these automatically
+website_verifiable:
+  - id: open_to_public
+    label: "Class is open to and attended by the broader public"
+    check_type: text_match
+    keywords:
+      - "open to the public"
+      - "open to all"
+      - "welcome everyone"
+      - "public welcome"
+      - "all are welcome"
+      - "community"
+    notes: "Search for language about public access; flag if restricted to members only."
+
+  - id: published_fees
+    label: "Class has published fees"
+    check_type: price_presence
+    notes: "Look for dollar amounts near the class name or in a pricing section. If no price visible, check for a linked fee schedule PDF."
+
+  - id: fees_identical_opwdd
+    label: "Fees are identical for OPWDD and non-OPWDD individuals"
+    check_type: text_match
+    keywords:
+      - "no special pricing"
+      - "same price for all"
+      - "no separate pricing"
+      - "no disability-only pricing"
+    notes: "Check for any mention of special rates. If no mention, assume identical (not-found is OK with note)."
+
+  - id: subject_based
+    label: "Class is subject-based (art, dance, martial arts, cooking, etc.)"
+    check_type: text_match
+    keywords: []
+    notes: "Implied by the class/item name itself — verified by LLM classification of the item name."
+
+  - id: no_college_credits
+    label: "Class does not give college credits"
+    check_type: text_match
+    keywords:
+      - "not for credit"
+      - "non-credit"
+      - "recreational"
+      - "no credit"
+      - "continuing education"
+      - "for fun"
+    notes: "Flag if the page mentions 'credit', 'CEU', or 'academic'."
+
+  - id: not_clinical
+    label: "Class is not clinical/therapy in nature"
+    check_type: text_match
+    keywords:
+      - "recreational"
+      - "not therapeutic"
+      - "not a therapy"
+      - "for enjoyment"
+    notes: "Flag if the page uses 'therapy', 'therapeutic', 'clinical', 'treatment'."
+
+  - id: published_schedule
+    label: "A published schedule exists"
+    check_type: schedule_presence
+    notes: "Look for days of the week, times, recurring dates, or a calendar. 'Schedule' or 'calendar' link."
+
+  - id: fee_match
+    label: "Fee-match: published fee is consistent with the Fee per Session on the form"
+    check_type: price_compare
+    notes: "Compare extracted website price to form fee. Consider unit (per session, per month, etc.)."
+
+# Internal-only checklist items — marked as not website-verifiable
+internal:
+  - id: budget_approved
+    label: "Are community classes currently approved in the budget?"
+  - id: community_inclusion
+    label: "Does the class provide opportunity for community inclusion?"
+  - id: health_safety_accommodation
+    label: "Does the class accommodate the individual's health and/or safety needs?"
+  - id: increases_independence
+    label: "Does the class increase independence or substitute for human assistance?"
+  - id: exclusively_for_participant
+    label: "Is the class provided exclusively for the benefit of the participant?"
+  - id: duplicates_medicaid_waiver
+    label: "Does the class duplicate any Medicaid state plan or HCBS waiver services?"
+  - id: duplicates_boe_services
+    label: "Does the class duplicate services given through Board of Education?"
+  - id: setting_restricted_to_dd
+    label: "Is the class given in a setting accessed only by people with Developmental Disabilities?"
+  - id: run_by_opwdd_staff
+    label: "Is the class run by OPWDD or a provider-agency staff acting in their official capacities?"
+  - id: located_on_opwdd_grounds
+    label: "Is the class located on grounds where OPWDD services are normally provided?"
+  - id: reimbursed_directly
+    label: "Is the class being reimbursed directly?"
+
+# Invoice rule context (not a checklist item, but useful for the report)
+invoice_rule:
+  sessions_per_day_max: 2
+  session_duration_minutes: 60
+  sessions_per_week_max: 7
+  rule_summary: ">2 sessions/day (≤60 min each) or >7 sessions/week at one provider needs prior approval"
