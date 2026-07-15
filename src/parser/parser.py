@@ -237,7 +237,13 @@ class MembershipParser(BaseParser):
     form_type = "membership"
 
     def can_handle(self, text: str) -> bool:
-        return any(p in text for p in ("Memberships preapproval", "Membership Pre-approval", "Health-Club"))
+        return any(p in text for p in (
+            "Memberships preapproval",
+            "Membership Pre-approval",
+            "Health Club",
+            "Health-Club",
+            "Organizational Memberships",
+        ))
 
     def field_defs(self) -> dict[str, str]:
         return {
@@ -246,7 +252,7 @@ class MembershipParser(BaseParser):
             "fi_coordinator": "FI Coordinator Name",
             "broker_name": "Broker Name",
             "requested_item": "Membership Name",
-            "provider_name": "Name of Organization",
+            "provider_name": "Name of Provider/Vendor",
             "provider_url": "Link to Webpage",
             "amount": "Membership Fee",
         }

@@ -1,0 +1,44 @@
+category: appeals
+description: "Pre-Approval Appeals — submitted after a denial; re-examines website evidence against the denial reason."
+
+fields:
+  item_label: "Class Name"
+  provider_label: "Name of Provider/Vendor"
+  url_label: "Link to Webpage / Place of Publication"
+  fee_label: "Fee per Session"
+  denial_reason_label: "Denial Reason"
+  justification_label: "Appeal Justification"
+
+website_verifiable:
+  - id: recheck_item_exists
+    label: "Re-verify class/item exists on provider website"
+    check_type: text_match
+    keywords: []
+    notes: "Search for the class/item name from the original form."
+
+  - id: recheck_published_fees
+    label: "Re-verify published fees match original application"
+    check_type: price_compare
+    notes: "Compare current site fee to form fee."
+
+  - id: recheck_open_to_public
+    label: "Re-verify class is open to the broader public"
+    check_type: text_match
+    keywords:
+      - "open to the public"
+      - "open to all"
+      - "welcome everyone"
+      - "community"
+    notes: "Denials often cite restricted access; re-verify."
+
+  - id: address_denial_reason
+    label: "Surface evidence that specifically supports or refutes the stated denial reason"
+    check_type: text_match
+    keywords: []
+    notes: "Parse denial_reason from form; search page for counter-evidence (e.g., if denial = 'no published fees', find fees)."
+
+internal:
+  - id: appeal_review
+    label: "Appeal reviewed by Pre-Approvals supervisor"
+  - id: original_denial
+    label: "Original denial rationale on file"

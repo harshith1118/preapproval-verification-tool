@@ -1,0 +1,52 @@
+category: transition
+description: "Transition Program — vocational/skill programs for adults who aged out of school."
+
+fields:
+  item_label: "Program Name"
+  provider_label: "Name of Provider"
+  url_label: "Link to Webpage / Place of Publication"
+  fee_label: "Program Fee"
+
+website_verifiable:
+  - id: published_fees
+    label: "Published fees exist"
+    check_type: price_presence
+    notes: "Look for fee amounts on the program page (per course, per month, etc.)."
+
+  - id: fee_sanity_check
+    label: "Fee sanity-check: ≤ $350 per course / ≤ $800 per month"
+    check_type: price_compare
+    max_course_fee: 350
+    max_monthly_fee: 800
+    notes: "Compare extracted fee to caps. If fee exceeds caps, flag."
+
+  - id: noncredit_skill_building
+    label: "Program is noncredit-bearing and oriented to skill-building / employment outcomes"
+    check_type: text_match
+    keywords:
+      - "noncredit"
+      - "non-credit"
+      - "skill-building"
+      - "skill building"
+      - "employment"
+      - "vocational"
+      - "job training"
+      - "workforce"
+      - "career"
+      - "certification"
+    notes: "Flag if page mentions 'college credit', 'degree', or 'academic credit'."
+
+  - id: not_opwdd_certified
+    label: "Program is not in an OPWDD-certified location"
+    check_type: text_match
+    keywords:
+      - "opwdd"
+      - "certified location"
+      - "licensed"
+    notes: "Flag if page mentions OPWDD certification; staff background screening is proven by letter, not website — mark as 'Needs Document'."
+
+internal:
+  - id: staff_background
+    label: "Staff background-screening proven by letter (not website-verifiable)"
+  - id: budget_approval
+    label: "Budget approval for transition programs"

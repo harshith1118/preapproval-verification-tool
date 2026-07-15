@@ -1,0 +1,47 @@
+category: otps
+description: "Other Than Personal Services — miscellaneous goods/services; has an exclusion list."
+
+fields:
+  item_label: "Item Name"
+  provider_label: "Name of Vendor"
+  url_label: "Link to Webpage / Place of Publication"
+  fee_label: "Item Price"
+
+website_verifiable:
+  - id: item_exists
+    label: "The item exists at the linked page, with a visible price"
+    check_type: price_presence
+    notes: "Look for a dollar amount near the product name/title."
+
+  - id: not_excluded
+    label: "Item plausibly not on the OTPS exclusion list"
+    check_type: text_match
+    keywords:
+      - "cable tv"
+      - "cable television"
+      - "internet service"
+      - "internet provider"
+      - "household supplies"
+      - "cleaning supplies"
+      - "paper towels"
+      - "toilet paper"
+      - "laundry detergent"
+      - "dish soap"
+      - "rental car"
+      - "rental vehicle"
+      - "legal fees"
+      - "attorney fees"
+      - "lawyer"
+      - "co-pay"
+      - "copay"
+      - "co-payment"
+      - "experimental therapy"
+      - "experimental treatment"
+      - "clinical trial"
+    notes: "Flag if the product matches any exclusion category. If no match found, status = Verified."
+
+internal:
+  - id: budget_cap
+    label: "Cap context: $3,000 / budget year"
+  - id: clinical_necessity
+    label: "Clinical necessity justified in Life Plan"

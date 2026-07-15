@@ -1,0 +1,52 @@
+category: hri
+description: "Household Related Items — equipment/items for the home (product link, not a class site)."
+
+fields:
+  item_label: "Item Name"
+  provider_label: "Name of Provider/Vendor"
+  url_label: "Link to Product Page"
+  fee_label: "Item Cost"
+
+website_verifiable:
+  - id: item_exists
+    label: "The item exists at the linked page, with a visible price"
+    check_type: price_presencepresence
+    notes: "Look for a dollar amount near the product name/title."
+
+  - id: not_excluded
+    label: "Item plausibly not on the exclusion list"
+    check_type: text_match
+    keywords:
+      - "cell phone"
+      - "mobile phone"
+      - "smartphone"
+      - "computer"
+      - "laptop"
+      - "tablet"
+      - "vehicle"
+      - "car"
+      - "truck"
+      - "medical device"
+      - "pill dispenser"
+      - "medication dispenser"
+    notes: "Flag if the product matches any exclusion category. If no match found, status = Verified."
+
+  - id: safety_features_supported
+    label: "Safety features described on the form are supported by the product page"
+    check_type: text_match
+    keywords:
+      - "safety"
+      - "secure"
+      - "lock"
+      - "auto-shutoff"
+      - "auto shutoff"
+      - "timer"
+      - "alert"
+      - "monitor"
+    notes: "Look for mention of safety features matching the form justification."
+
+internal:
+  - id: budget_approved
+    label: "HRI currently approved in the budget"
+  - id: cap_context
+    label: "Cap context: $1,500 / budget year; approval valid 3 months"
