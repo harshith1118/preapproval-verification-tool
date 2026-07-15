@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.venv/
+venv/
+env/
+
+# Playwright
+.playwright/
+
+# Distribution
+dist/
+build/
+*.egg-info/
+
+# Local testing artifacts (optional - keep evidence/reports if desired)
+# evidence/
+# reports/
